@@ -24,4 +24,9 @@ public class SuthaCardFactory implements CartaFactory {
         String owner = "Sutha";
         return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra, habilidad);
     }
+
+    public Carta createCartaEspecial(Habilidad habilidad) {
+        String owner = "Sutha";
+        return new CartaEspecial(owner, habilidad);
+    }
 }

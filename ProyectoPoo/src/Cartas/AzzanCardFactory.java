@@ -21,6 +21,12 @@ public class AzzanCardFactory implements CartaFactory {
 
     public Carta createCartaEspecial(int espadas, int corazones, int escudos, int rayos, int cartasExtra, Habilidad habilidad){
         String owner = "Azzan";
-        return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra, habilidad);
+        return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra,habilidad);
+    }
+
+    @Override
+    public Carta createCartaEspecial(Habilidad habilidad) {
+        String owner = "Azzan";
+        return new CartaEspecial(owner, habilidad);
     }
 }

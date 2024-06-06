@@ -24,4 +24,9 @@ public class MinscAndBooCardFactory implements CartaFactory {
         String owner = "MinscAndBoo";
         return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra, habilidad);
     }
+
+    public Carta createCartaEspecial(Habilidad habilidad) {
+        String owner = "MinscAndBoo";
+        return new CartaEspecial(owner, habilidad);
+    }
 }

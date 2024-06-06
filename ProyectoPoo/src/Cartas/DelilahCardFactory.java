@@ -24,4 +24,9 @@ public class DelilahCardFactory implements CartaFactory {
         String owner = "Delilah";
         return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra, habilidad);
     }
+
+    public Carta createCartaEspecial(Habilidad habilidad) {
+        String owner = "Delilah";
+        return new CartaEspecial(owner, habilidad);
+    }
 }

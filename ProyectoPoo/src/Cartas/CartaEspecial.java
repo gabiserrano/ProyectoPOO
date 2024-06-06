@@ -14,13 +14,13 @@ public class CartaEspecial extends CartaNormal implements Carta{
         super(owner);
     }
 
-    public CartaEspecial(Habilidad habilidad){
-        super(0,0,0,0,0);
+    public CartaEspecial(String owner, Habilidad habilidad){
+        super(owner,0,0,0,0,0);
         this.habilidad = habilidad;
     }
 
-    public CartaEspecial(int espadas, int corazones, int escudos, int rayos, int cartasExtra, Habilidad habilidad) {
-        super(espadas,corazones,escudos,rayos,cartasExtra);
+    public CartaEspecial(String owner, int espadas, int corazones, int escudos, int rayos, int cartasExtra, Habilidad habilidad) {
+        super(owner,espadas,corazones,escudos,rayos,cartasExtra);
         this.habilidad = habilidad;
     }
 

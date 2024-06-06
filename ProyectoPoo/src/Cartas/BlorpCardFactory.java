@@ -24,4 +24,10 @@ public class BlorpCardFactory implements CartaFactory {
         String owner = "Blorp";
         return new CartaEspecial(owner, espadas,corazones,escudos,rayos,cartasExtra, habilidad);
     }
+
+    @Override
+    public Carta createCartaEspecial(Habilidad habilidad) {
+        String owner = "Blorp";
+        return new CartaEspecial(owner, habilidad);
+    }
 }

@@ -15,7 +15,8 @@ public class CartaNormal implements Carta {
         this.owner = owner;
     }
 
-    public CartaNormal(int espadas, int corazones, int escudos, int rayos, int cartasExtra) {
+    public CartaNormal(String owner, int espadas, int corazones, int escudos, int rayos, int cartasExtra) {
+        this.owner = owner;
         this.espadas = espadas;
         this.corazones = corazones;
         this.escudos = escudos;
