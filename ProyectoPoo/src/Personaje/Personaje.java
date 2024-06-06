@@ -1,6 +1,6 @@
 package Personaje;
 
-import Habilidad.Habilidad;
+import Habilidades.Habilidad;
 
 public class Personaje {
 
