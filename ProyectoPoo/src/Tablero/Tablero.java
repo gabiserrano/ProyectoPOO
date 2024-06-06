@@ -20,7 +20,7 @@ public class Tablero {
 
     public void empezarPartida(){
         for (Player p : jugadores) {
-            p.mezclarCartas();
+            p.mezclarCartas(p.getMazo());
 
         }
 

@@ -3,13 +3,13 @@ package Player;
 import Cartas.Carta;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.shuffle;
 
 public class Player {
     private String nombre;
     private Character personaje;
+    private int vida;
 
     private List<Carta> mazo;
     private List<Carta> mano;
@@ -19,7 +19,7 @@ public class Player {
 
     //Constructors
     public Player (){
-        mazo = new ArrayList<Carta>(personaje.getCartas());
+        mazo = new ArrayList<Carta>();
         mano = new ArrayList<Carta>();
         jugada = new ArrayList<Carta>();
         cartasActivas = new ArrayList<Carta>();
@@ -41,8 +41,8 @@ public class Player {
     //Metodos
 
     //Mezcla las cartas del mazo
-    public void mezclarCartas(){
-        shuffle(mazo);
+    public void mezclarCartas(List<Carta> cartas){
+        Collections.shuffle(cartas);
     }
 
     //Esta accion ejecuta todas las acciones de las cartas cuando ya se hayan acabado los rayitos
@@ -102,6 +102,8 @@ public class Player {
 /* To Do:
 - Observer - Cuando el jugador se quede sin cartas, que agarre dos cartas
 - Singleton - Crear el tablero y que sea unico
--
+- Factory Menus
+- composite para las cartas
+- Chain of responsability
 
  */

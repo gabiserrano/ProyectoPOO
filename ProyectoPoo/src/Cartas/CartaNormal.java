@@ -1,7 +1,7 @@
 package Cartas;
 
 public class CartaNormal implements Carta {
-    //private Player propietario;
+    private String owner;
     private int espadas;
     private int corazones;
     private int escudos;
@@ -9,6 +9,10 @@ public class CartaNormal implements Carta {
     private int cartasExtra;
 
     public CartaNormal() {
+    }
+
+    public CartaNormal(String owner){
+        this.owner = owner;
     }
 
     public CartaNormal(int espadas, int corazones, int escudos, int rayos, int cartasExtra) {
