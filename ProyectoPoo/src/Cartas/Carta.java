@@ -8,4 +8,6 @@ public interface Carta {
     public void curar();
     public void jugarCarta();
 
+    boolean esCartaEscudo();
+
 }
