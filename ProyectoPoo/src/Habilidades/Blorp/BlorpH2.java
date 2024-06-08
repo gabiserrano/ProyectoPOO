@@ -4,7 +4,7 @@ import Cartas.Carta;
 import Habilidades.AbstractHabilidad;
 import Player.Player;
 
-public abstract class BlorpH2 extends AbstractHabilidad {
+public class BlorpH2 extends AbstractHabilidad {
     public BlorpH2() {
         super("Destrucción de Escudo", "Destroy a shield card and heal the amount of shields the card had");
     }
@@ -24,5 +24,10 @@ public abstract class BlorpH2 extends AbstractHabilidad {
         } else {
             System.out.println("No hay cartas de escudo para destruir.");
         }
+    }
+
+    @Override
+    public void usarHabilidad() {
+
     }
 }
