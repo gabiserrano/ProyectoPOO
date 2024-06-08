@@ -24,3 +24,4 @@ public abstract class AbstractHabilidad implements Habilidad {
         return descripcion;
     }
 }
+

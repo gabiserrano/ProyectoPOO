@@ -1,18 +1,22 @@
 package Cartas;
 
-import Habilidades.Habilidades;
+import Habilidades.Habilidad;
 
-public class CartaEspecial extends CartaNormal implements Carta{
-    private Habilidades habilidad;
+public class CartaEspecial extends CartaNormal implements Carta {
+    private Habilidad habilidad;
 
-    public CartaEspecial(int espadas, int corazones, int escudos, int rayos, int cartasExtra, Habilidades habilidad) {
-        super(espadas,corazones,escudos,rayos,cartasExtra);
+    public CartaEspecial(int espadas, int corazones, int escudos, int rayos, int cartasExtra, Habilidad habilidad) {
+        super(espadas, corazones, escudos, rayos, cartasExtra);
         this.habilidad = habilidad;
     }
 
     @Override
-    public void jugarCarta(){
-
+    public void jugarCarta() {
         habilidad.usarHabilidad();
+    }
+
+    @Override
+    public boolean esCartaEscudo() {
+        return false;
     }
 }

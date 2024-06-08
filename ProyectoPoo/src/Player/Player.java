@@ -1,25 +1,27 @@
 package Player;
 
-import Cartas.Carta;
 import Observer.Observer;
+import Cartas.Carta;
 import Tablero.Tablero;
+import Cartas.CartaEscudo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.shuffle;
 
 public class Player implements Observer {
     private String nombre;
     private Character personaje;
     private int vida;
+    private boolean ignorarEscudos; // Estado para ignorar escudos
+    private boolean ataqueDoble; // Estado para ataque doble
+    private boolean controlarObjetivoEscudos; // Estado para controlar objetivo de escudos
     private List<Carta> mazo;
     private List<Carta> mano;
     private List<Carta> jugada;
     private List<Carta> cartasActivas;
     private List<Carta> descartadas;
-    private Tablero tablero; // Agregamos una referencia al tablero
-
-    // Constructores
 
     public Player() {
         this("", null);
@@ -28,7 +30,10 @@ public class Player implements Observer {
     public Player(String nombre, Character personaje) {
         this.nombre = nombre;
         this.personaje = personaje;
-        this.vida = 100; // Vida inicial, puedes ajustar según las reglas del juego
+        this.vida = 100; // Vida inicial
+        this.ignorarEscudos = false;
+        this.ataqueDoble = false;
+        this.controlarObjetivoEscudos = false;
 
         mazo = new ArrayList<>(personaje != null ? personaje.getCartas() : new ArrayList<>());
         mano = new ArrayList<>();
@@ -36,8 +41,6 @@ public class Player implements Observer {
         cartasActivas = new ArrayList<>();
         descartadas = new ArrayList<>();
     }
-
-    // Métodos
 
     // Método para recibir daño
     public void recibirDanio(int cantidad) {
@@ -51,12 +54,12 @@ public class Player implements Observer {
 
     // Método para obtener el tablero
     public Tablero getTablero() {
-        return tablero;
+        return Tablero.getInstancia();
     }
 
     // Método para mezclar cartas del mazo
     public void mezclarCartas() {
-        Collections.shuffle(mazo);
+        shuffle(mazo);
     }
 
     // Método para terminar el turno
@@ -66,6 +69,8 @@ public class Player implements Observer {
             descartadas.add(carta);
         }
         jugada.clear(); // Limpia la lista de jugadas después de terminar el turno
+        // Resetea estados temporales después del turno
+        resetearEstados();
     }
 
     // Método para tomar una carta
@@ -79,8 +84,68 @@ public class Player implements Observer {
     // Implementación del método `actualizar` de la interfaz `Observer`
     @Override
     public void actualizar() {
-        // Código para actualizar el estado del jugador cuando el tablero cambia
         System.out.println(nombre + " ha sido notificado sobre un cambio en el tablero.");
+    }
+
+    // Métodos para manejar el estado de ignorar escudos
+    public boolean puedeIgnorarEscudos() {
+        return ignorarEscudos;
+    }
+
+    public void setIgnorarEscudos(boolean ignorarEscudos) {
+        this.ignorarEscudos = ignorarEscudos;
+    }
+
+    // Métodos para manejar el estado de ataque doble
+    public boolean tieneAtaqueDoble() {
+        return ataqueDoble;
+    }
+
+    public void setAtaqueDoble(boolean ataqueDoble) {
+        this.ataqueDoble = ataqueDoble;
+    }
+
+    // Métodos para manejar el estado de controlar objetivo de escudos
+    public boolean puedeControlarObjetivoEscudos() {
+        return controlarObjetivoEscudos;
+    }
+
+    public void setControlarObjetivoEscudos(boolean controlarObjetivoEscudos) {
+        this.controlarObjetivoEscudos = controlarObjetivoEscudos;
+    }
+
+    // Método para resetear estados temporales
+    private void resetearEstados() {
+        ignorarEscudos = false;
+        ataqueDoble = false;
+        controlarObjetivoEscudos = false;
+    }
+
+    // Método para destruir una carta de escudo y curar vida
+    public void destruirCartaEscudo(Carta cartaEscudo) {
+        if (cartaEscudo.esCartaEscudo()) {
+            int cantidadEscudos = ((CartaEscudo)cartaEscudo).getEscudos();
+            cartasActivas.remove(cartaEscudo);
+            vida += cantidadEscudos;
+            System.out.println(nombre + " ha destruido una carta de escudo y ha recuperado " + cantidadEscudos + " puntos de vida. Vida actual: " + vida);
+        }
+    }
+
+    public void agregarEscudo() {
+        // Lógica para agregar un escudo al jugador
+        System.out.println(nombre + " ha recibido un escudo.");
+    }
+
+    // Método para jugar una carta extra
+    public void jugarCartaExtra() {
+        // Lógica para jugar una carta extra
+        System.out.println(nombre + " juega una carta extra.");
+    }
+
+    // Método para curar una cantidad específica de puntos de vida
+    public void curar(int cantidad) {
+        vida += cantidad;
+        System.out.println(nombre + " ha sido curado " + cantidad + " puntos de vida. Vida actual: " + vida);
     }
 
     // Setters y Getters
@@ -118,10 +183,6 @@ public class Player implements Observer {
         return descartadas;
     }
 
-    public void setTablero(Tablero tablero) {
-        this.tablero = tablero;
-    }
-
     public int getVida() {
         return vida;
     }
@@ -130,6 +191,7 @@ public class Player implements Observer {
         this.vida = vida;
     }
 }
+
 
 
 

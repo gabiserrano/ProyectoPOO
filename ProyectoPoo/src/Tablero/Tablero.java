@@ -1,84 +1,52 @@
 package Tablero;
 
-import Observer.Observable;
+import Cartas.Carta;
 import Player.Player;
-import Player.Character;
-
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Tablero extends Observable {
-    private static Tablero instancia; // La única instancia del Tablero
+public class Tablero {
+    private static Tablero instancia; // Singleton instance
+
+    // Atributos del tablero
     private List<Player> jugadores;
-    private List<Character> personajes;
+    private List<Carta> cartasEnJuego;
 
-    // Constructor privado para evitar instanciación externa
+    // Constructor privado para evitar instanciación directa
     private Tablero() {
-        jugadores = new ArrayList<>();
-        personajes = new ArrayList<>();
+        // Inicializa los atributos del tablero según sea necesario
     }
 
-    // Método para obtener la única instancia del Tablero
-    public static synchronized Tablero getInstance() {
+    // Método para obtener la instancia singleton
+    public static synchronized Tablero getInstancia() {
         if (instancia == null) {
             instancia = new Tablero();
         }
         return instancia;
     }
 
+    // Métodos del tablero
+    public void agregarJugador(Player jugador) {
+        jugadores.add(jugador);
+    }
+
+    public void removerJugador(Player jugador) {
+        jugadores.remove(jugador);
+    }
+
     public List<Player> getJugadores() {
         return jugadores;
     }
 
-    public void removerJugador() {
-        if (!jugadores.isEmpty()) {
-            jugadores.remove(jugadores.size() - 1);
-            notifyObservers(); // Notifica a los observadores sobre el cambio
-        }
+    public List<Carta> getCartasEnJuego() {
+        return cartasEnJuego;
     }
 
-    public void agregarCPU() {
-        Player CPU = new Player();
-        jugadores.add(CPU);
-        notifyObservers(); // Notifica a los observadores sobre el cambio
+    public void agregarCarta(Carta carta) {
+        cartasEnJuego.add(carta);
     }
 
-    public void empezarPartida() {
-        for (Player p : jugadores) {
-            p.mezclarCartas();
-        }
-        notifyObservers(); // Notifica a los observadores sobre el cambio
-    }
-
-    public Character seleccionarPersonaje() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Seleccione un personaje");
-        int i = 0;
-
-        for (Character personaje : personajes) {
-            System.out.println((i++) + ". " + personaje.getNombre());
-            System.out.println("Descripcion: " + personaje.getDescripcion());
-            System.out.println("Color: " + personaje.getColor());
-            System.out.println("--------------------");
-        }
-
-        int seleccion = sc.nextInt();
-        return personajes.get(seleccion - 1);
-    }
-
-    public void agregarJugador() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nombre: ");
-        String nombre = sc.nextLine();
-        Character personaje = seleccionarPersonaje();
-
-        Player jugador = new Player(nombre, personaje);
-        jugadores.add(jugador);
-        notifyObservers(); // Notifica a los observadores sobre el cambio
-    }
-
-    public void agregarPersonaje(Character personaje) {
-        personajes.add(personaje);
+    public void removerCarta(Carta carta) {
+        cartasEnJuego.remove(carta);
     }
 }
+
