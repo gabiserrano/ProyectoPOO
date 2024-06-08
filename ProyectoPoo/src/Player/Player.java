@@ -1,68 +1,119 @@
 package Player;
 
 import Cartas.Carta;
+import Observer.Observer;
+import Tablero.Tablero;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static java.util.Collections.shuffle;
-
-public class Player {
+public class Player implements Observer {
     private String nombre;
     private Character personaje;
-
+    private int vida;
+    private int escudosActivos; // Nuevo campo para llevar la cuenta de los escudos activos
     private List<Carta> mazo;
     private List<Carta> mano;
     private List<Carta> jugada;
     private List<Carta> cartasActivas;
     private List<Carta> descartadas;
+    private Tablero tablero; // Agregamos una referencia al tablero
 
-    //Constructors
-    public Player (){
-        mazo = new ArrayList<Carta>(personaje.getCartas());
-        mano = new ArrayList<Carta>();
-        jugada = new ArrayList<Carta>();
-        cartasActivas = new ArrayList<Carta>();
-        descartadas = new ArrayList<Carta>();
+    // Constructores
+
+    public Player() {
+        this("", null);
     }
-
 
     public Player(String nombre, Character personaje) {
         this.nombre = nombre;
         this.personaje = personaje;
+        this.vida = 100; // Vida inicial, puedes ajustar según las reglas del juego
+        this.escudosActivos = 0; // Inicialmente no hay escudos activos
 
-        mazo = new ArrayList<Carta>(personaje.getCartas());
-        mano = new ArrayList<Carta>();
-        jugada = new ArrayList<Carta>();
-        cartasActivas = new ArrayList<Carta>();
-        descartadas = new ArrayList<Carta>();
+        mazo = new ArrayList<>(personaje != null ? personaje.getCartas() : new ArrayList<>());
+        mano = new ArrayList<>();
+        jugada = new ArrayList<>();
+        cartasActivas = new ArrayList<>();
+        descartadas = new ArrayList<>();
     }
 
-    //Metodos
+    // Métodos
 
-    //Mezcla las cartas del mazo
-    public void mezclarCartas(){
-        shuffle(mazo);
-    }
-
-    //Esta accion ejecuta todas las acciones de las cartas cuando ya se hayan acabado los rayitos
-    //Recorre la lista de cartas jugadas ese turno, las ejecuta y las manda a las cartas descartadas
-    public void terminarTurno(){
-        for (Carta carta : jugada) {
-            carta.jugarCarta();
-            jugada.remove(carta);
-            descartadas.add(carta);
+    // Método para recibir daño
+    public void recibirDanio(int cantidad) {
+        if (escudosActivos > 0) {
+            escudosActivos -= cantidad;
+            System.out.println(nombre + " ha bloqueado " + cantidad + " puntos de daño con un escudo. Escudos restantes: " + escudosActivos);
+            if (escudosActivos < 0) {
+                vida += escudosActivos; // Resta lo que quede después de los escudos
+                escudosActivos = 0;
+            }
+        } else {
+            vida -= cantidad;
+        }
+        System.out.println(nombre + " ha recibido " + cantidad + " puntos de daño. Vida restante: " + vida);
+        if (vida <= 0) {
+            System.out.println(nombre + " ha sido derrotado.");
+            // Aquí puedes añadir lógica adicional si el jugador es derrotado
         }
     }
 
-    //Funcion para agarrar cartas de un mazo especificado
-    public void tomarCarta(List<Carta> cartas){
-        Carta carta = cartas.getLast();
-        cartas.remove(carta);
-        mano.add(carta);
+    // Método para agregar escudos
+    public void agregarEscudo() {
+        escudosActivos++;
+        System.out.println(nombre + " ha ganado un escudo. Escudos activos: " + escudosActivos);
     }
 
-    //Setters and Getters
+    // Método para curar vida
+    public void curar(int cantidad) {
+        vida += cantidad;
+        System.out.println(nombre + " se ha curado " + cantidad + " puntos de vida. Vida actual: " + vida);
+    }
+
+    // Método para obtener el tablero
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    // Método para mezclar cartas del mazo
+    public void mezclarCartas() {
+        Collections.shuffle(this.mazo);
+    }
+
+    // Método para terminar el turno
+    public void terminarTurno() {
+        for (Carta carta : jugada) {
+            carta.jugarCarta();
+            descartadas.add(carta);
+        }
+        jugada.clear(); // Limpia la lista de jugadas después de terminar el turno
+    }
+
+    // Método para tomar una carta
+    public void tomarCarta(List<Carta> cartas) {
+        if (!cartas.isEmpty()) {
+            Carta carta = cartas.remove(cartas.size() - 1); // Obtiene la última carta de la lista
+            mano.add(carta);
+        }
+    }
+
+    // Método para jugar una carta extra
+    public void jugarCartaExtra() {
+        // Aquí podrías agregar la lógica para permitir al jugador jugar otra carta
+        System.out.println(nombre + " puede jugar una carta extra.");
+    }
+
+    // Implementación del método `actualizar` de la interfaz `Observer`
+    @Override
+    public void actualizar() {
+        // Código para actualizar el estado del jugador cuando el tablero cambia
+        System.out.println(nombre + " ha sido notificado sobre un cambio en el tablero.");
+    }
+
+    // Setters y Getters
+
     public String getNombre() {
         return nombre;
     }
@@ -77,7 +128,7 @@ public class Player {
 
     public void setPersonaje(Character personaje) {
         this.personaje = personaje;
-        mazo = personaje.getCartas();
+        mazo = new ArrayList<>(personaje.getCartas());
     }
 
     public List<Carta> getMazo() {
@@ -95,13 +146,26 @@ public class Player {
     public List<Carta> getDescartadas() {
         return descartadas;
     }
-}
 
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+}
 
 
 /* To Do:
 - Observer - Cuando el jugador se quede sin cartas, que agarre dos cartas
 - Singleton - Crear el tablero y que sea unico
--
+- Factory Menus
+- composite para las cartas
+- Chain of responsability
 
  */

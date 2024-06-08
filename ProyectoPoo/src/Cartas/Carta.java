@@ -1,11 +1,13 @@
 package Cartas;
 
-public interface Carta {
-    public void atacar();
-    public void escudo();
-    public void cartaExtra();
-    public void rayo();
-    public void curar();
-    public void jugarCarta();
+import Player.Player;
 
+public interface Carta {
+
+    void atacar(Player objetivo);
+    void escudo(Player jugador);
+    void cartaExtra(Player jugador);
+    void rayo(Player jugador);
+    void curar(Player jugador);
+    void jugarCarta();
 }
