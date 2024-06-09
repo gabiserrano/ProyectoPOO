@@ -12,4 +12,6 @@ public interface Carta {
 
     // Método para verificar si la carta es de escudo
     boolean esCartaEscudo();
+
+    int getValorEscudo();
 }

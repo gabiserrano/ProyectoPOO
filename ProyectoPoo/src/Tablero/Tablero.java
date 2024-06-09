@@ -7,16 +7,16 @@ import java.util.List;
 public class Tablero {
     private static Tablero instancia; // Singleton instance
 
-    // Atributos del tablero
+    /**Atributos del tablero*/
     private List<Player> jugadores;
     private List<Carta> cartasEnJuego;
 
-    // Constructor privado para evitar instanciación directa
+    /** Constructor privado para evitar instanciación directa*/
     private Tablero() {
-        // Inicializa los atributos del tablero según sea necesario
+        /** Inicializa los atributos del tablero según sea necesario*/
     }
 
-    // Método para obtener la instancia singleton
+    /**Método para obtener la instancia singleton*/
     public static synchronized Tablero getInstancia() {
         if (instancia == null) {
             instancia = new Tablero();
@@ -24,7 +24,7 @@ public class Tablero {
         return instancia;
     }
 
-    // Métodos del tablero
+    /**Métodos del tablero*/
     public void agregarJugador(Player jugador) {
         jugadores.add(jugador);
     }

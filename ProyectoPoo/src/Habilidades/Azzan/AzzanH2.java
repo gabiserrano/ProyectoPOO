@@ -20,11 +20,11 @@ public class AzzanH2 extends AbstractHabilidad {
         Carta cartaEscudo = obtenerCartaEscudo(oponente);
 
         if (cartaEscudo != null) {
-            // Usar la carta de escudo
+            /** Usar la carta de escudo */
             jugador.getMano().add(cartaEscudo);
             oponente.getCartasActivas().remove(cartaEscudo);
 
-            // Mensaje de confirmación
+            /** Mensaje de confirmación */
             System.out.println(jugador.getNombre() + " ha tomado una carta de escudo de " + oponente.getNombre());
         } else {
             System.out.println("No se encontró una carta de escudo.");

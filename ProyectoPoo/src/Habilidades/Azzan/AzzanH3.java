@@ -20,17 +20,17 @@ public class AzzanH3 extends AbstractHabilidad {
         jugador.setVida(oponente.getVida());
         oponente.setVida(temp);
 
-        // Mensaje de confirmación
+        /** Mensaje de confirmación*/
         System.out.println("Los puntos de vida de " + jugador.getNombre() + " han sido intercambiados con los de " + oponente.getNombre());
     }
 
     private Player obtenerOponente(Player jugador) {
-        // Implementa la lógica para obtener un oponente aquí
+        /** Implementa la lógica para obtener un oponente aquí*/
         return null;
     }
 
     @Override
     public void usarHabilidad() {
-        // Implementación adicional si es necesaria
+
     }
 }
