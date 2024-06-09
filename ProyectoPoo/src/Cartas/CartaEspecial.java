@@ -8,6 +8,7 @@ public class CartaEspecial extends CartaNormal implements Carta{
     private boolean shield;
     private AbstractHabilidad habilidades;
     private int danio;
+    private int shieldAmount;
 
     public CartaEspecial(){
         super();
@@ -45,4 +46,18 @@ public class CartaEspecial extends CartaNormal implements Carta{
     public int getDanio() {
         return danio;
     }
+
+    public int getShieldAmount() {
+        return shieldAmount;
+    }
+
+    public void setShield(boolean shield) {
+        this.shield = shield;
+    }
+
+    public void setShieldAmount(int shieldAmount) {
+        this.shieldAmount = shieldAmount;
+    }
+
+
 }
