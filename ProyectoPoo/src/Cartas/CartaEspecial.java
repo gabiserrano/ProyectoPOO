@@ -7,6 +7,7 @@ public class CartaEspecial extends CartaNormal implements Carta{
     private Habilidad habilidad;
     private boolean shield;
     private AbstractHabilidad habilidades;
+    private int danio;
 
     public CartaEspecial(){
         super();
@@ -37,4 +38,11 @@ public class CartaEspecial extends CartaNormal implements Carta{
     }
 
 
+    public void incrementarDanio(int interest) {
+        this.danio += interest;
+    }
+
+    public int getDanio() {
+        return danio;
+    }
 }
