@@ -13,12 +13,17 @@ public class Player implements Observer {
     private Character personaje;
     private int vida;
     private int escudosActivos; // Nuevo campo para llevar la cuenta de los escudos activos
+    private boolean ignoreShields; //para la habilidad de ignorar escudos
+    private boolean attackTwiceOnCardDestruction; //para la habilidad de atacar 2
+    private boolean controlShields;
     private List<Carta> mazo;
     private List<Carta> mano;
     private List<Carta> jugada;
     private List<Carta> cartasActivas;
     private List<Carta> descartadas;
     private Tablero tablero; // Agregamos una referencia al tablero
+
+
 
     // Constructores
 
@@ -112,7 +117,55 @@ public class Player implements Observer {
         System.out.println(nombre + " ha sido notificado sobre un cambio en el tablero.");
     }
 
+    public void recibirDanioDirecto(int cantidad) {
+        // Aplicar daño directo sin considerar escudos
+        this.vida -= cantidad;
+        System.out.println(nombre + " ha recibido " + cantidad + " puntos de daño directo. Vida restante: " + vida);
+        if (vida <= 0) {
+            System.out.println(nombre + " ha sido derrotado.");
+        }
+    }
+
+    // Método para atacar
+    public void atacar(Player oponente, int cantidad) {
+        if (ignoreShields) {
+            oponente.recibirDanioDirecto(cantidad);
+        } else {
+            oponente.recibirDanio(cantidad);
+        }
+    }
+
+    // Método para destruir una carta
+    public void destruirCarta(Carta carta) {
+        cartasActivas.remove(carta);
+        if (attackTwiceOnCardDestruction) {
+            // Atacar dos veces
+            atacar(this, 1);
+            atacar(this, 1);
+            System.out.println(nombre + " ha atacado dos veces debido a la destrucción de una carta.");
+        }
+
+    }
+
+
+
     // Setters y Getters
+
+    public boolean isIgnoreShields() {
+        return ignoreShields;
+    }
+
+    public void setIgnoreShields(boolean ignoreShields) {
+        this.ignoreShields = ignoreShields;
+    }
+
+    public boolean isAttackTwiceOnCardDestruction() {
+        return attackTwiceOnCardDestruction;
+    }
+
+    public void setAttackTwiceOnCardDestruction(boolean attackTwiceOnCardDestruction) {
+        this.attackTwiceOnCardDestruction = attackTwiceOnCardDestruction;
+    }
 
     public String getNombre() {
         return nombre;
@@ -158,7 +211,17 @@ public class Player implements Observer {
     public void setVida(int vida) {
         this.vida = vida;
     }
+
+    public boolean isControlShields() {
+        return controlShields;
+    }
+
+    public void setControlShields(boolean controlShields) {
+        this.controlShields = controlShields;
+    }
 }
+
+
 
 
 /* To Do:
