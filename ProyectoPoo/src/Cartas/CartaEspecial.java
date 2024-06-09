@@ -1,9 +1,12 @@
 package Cartas;
 
+import Habilidades.AbstractHabilidad;
 import Habilidades.Habilidad;
 
 public class CartaEspecial extends CartaNormal implements Carta{
     private Habilidad habilidad;
+    private boolean shield;
+    private AbstractHabilidad habilidades;
 
     public CartaEspecial(){
         super();
@@ -24,8 +27,14 @@ public class CartaEspecial extends CartaNormal implements Carta{
         this.habilidad = habilidad;
     }
 
-    @Override
-    public void jugarCarta(){
-        habilidad.usarHabilidad();
+    public CartaEspecial(String name , boolean shield,AbstractHabilidad habilidad) {
+        super(name);
+        this.shield = shield;
+        this.habilidad = habilidad;
     }
+    public boolean hasShield() {
+        return shield;
+    }
+
+
 }
