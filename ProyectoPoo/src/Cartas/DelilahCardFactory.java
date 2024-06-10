@@ -6,7 +6,7 @@ public class DelilahCardFactory implements CartaFactory {
     @Override
     public Carta createCartaNormal() {
         String owner = "Delilah";
-        return new CartaNormal(owner);
+        return new CartaNormal(owner, "Carta de Lia");
     }
 
     public Carta createCartaNormal(int espadas, int corazones, int escudos, int rayos, int cartasExtra){

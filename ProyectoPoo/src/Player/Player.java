@@ -27,14 +27,16 @@ public class Player implements Observer {
 
     // Constructores
 
-    public Player() {
-        this("", null);
+    public Player(String nombre, List<Carta> mano) {
+        this.nombre = nombre;
+        this.mano = mano;
+
     }
 
     public Player(String nombre, Character personaje) {
         this.nombre = nombre;
         this.personaje = personaje;
-        this.vida = 100; // Vida inicial, puedes ajustar según las reglas del juego
+        this.vida = 10; // Vida inicial, puedes ajustar según las reglas del juego
         this.escudosActivos = 0; // Inicialmente no hay escudos activos
 
         mazo = new ArrayList<>(personaje != null ? personaje.getCartas() : new ArrayList<>());

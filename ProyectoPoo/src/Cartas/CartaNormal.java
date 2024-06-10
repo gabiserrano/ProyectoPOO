@@ -13,7 +13,7 @@ public class CartaNormal implements Carta {
     public CartaNormal() {
     }
 
-    public CartaNormal(String owner){
+    public CartaNormal(String owner, String cartaDeLia){
         this.owner = owner;
     }
 
