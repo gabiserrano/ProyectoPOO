@@ -25,7 +25,7 @@ public class MainMenu {
             System.out.println("4. Salir");
             System.out.print("Selecciona una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine();  // Consumir el salto de línea
+            scanner.nextLine();  /**Consumir el salto de línea*/
 
             switch (opcion) {
                 case 1:
@@ -49,7 +49,7 @@ public class MainMenu {
     private static void crearJugador(Scanner scanner, List<Player> players) {
         System.out.print("Nombre del jugador: ");
         String nombre = scanner.nextLine();
-        List<Carta> mano = new ArrayList<>();  // Crear una mano vacía para el jugador
+        List<Carta> mano = new ArrayList<>();   /**Crear una mano vacía para el jugador*/
         Player player = new Player(nombre, mano);
         players.add(player);
         System.out.println("Jugador " + nombre + " creado.");

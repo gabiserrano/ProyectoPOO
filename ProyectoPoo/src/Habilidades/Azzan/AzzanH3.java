@@ -6,9 +6,18 @@ import Player.Player;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * La clase AzzanH3 representa una habilidad específica para un personaje llamado Azzan.
+ * Esta habilidad permite al jugador intercambiar puntos de vida con un oponente seleccionado.
+ */
 public class AzzanH3 extends AbstractHabilidad {
 
-
+    /**
+     * Este método aplica la habilidad al jugador y a sus oponentes.
+     *
+     * @param player    El jugador que usa la habilidad.
+     * @param opponents La lista de oponentes entre los cuales se puede elegir uno para intercambiar puntos de vida.
+     */
     @Override
     public void usarHabilidad(Player player, List<Player> opponents) {
         // Mostrar los oponentes al jugador para elegir uno
@@ -37,5 +46,4 @@ public class AzzanH3 extends AbstractHabilidad {
 
         System.out.println(player.getNombre() + " ha intercambiado puntos de vida con " + selectedOpponent.getNombre());
     }
-
 }
