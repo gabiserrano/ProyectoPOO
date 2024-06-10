@@ -6,7 +6,7 @@ public class CartaNormal implements Carta {
     private String owner;
     private int espadas;
     private int corazones;
-    private int escudos;
+    protected int escudos;
     private int rayos;
     private int cartasExtra;
 
@@ -25,16 +25,7 @@ public class CartaNormal implements Carta {
         this.cartasExtra = cartasExtra;
     }
 
-    // Nuevo constructor
-    public CartaNormal(int espadas, int corazones, int escudos, int rayos, int cartasExtra) {
-        this.espadas = espadas;
-        this.corazones = corazones;
-        this.escudos = escudos;
-        this.rayos = rayos;
-        this.cartasExtra = cartasExtra;
-    }
-
-    // Implementación de métodos de Carta
+    // Implementación de métodos de la interfaz Carta
     @Override
     public void atacar(Player objetivo) {
         if (espadas > 0) {
@@ -100,10 +91,17 @@ public class CartaNormal implements Carta {
         return false;
     }
 
+    @Override
+    public int getValorEscudo() {
+        return 0;
+    }
+
+    // Método adicional para descartar la carta
     private void descartar() {
         System.out.println("La carta de " + owner + " ha sido descartada al cementerio.");
     }
 
+    // Getters y setters para los atributos privados
     public int getEspadas() {
         return espadas;
     }
@@ -144,4 +142,3 @@ public class CartaNormal implements Carta {
         this.cartasExtra = cartasExtra;
     }
 }
-

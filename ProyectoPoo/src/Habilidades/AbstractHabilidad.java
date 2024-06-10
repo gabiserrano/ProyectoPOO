@@ -1,6 +1,7 @@
 package Habilidades;
 
 import Player.Player;
+import java.util.List;
 
 public abstract class AbstractHabilidad implements Habilidad {
     protected String nombre;
@@ -13,7 +14,7 @@ public abstract class AbstractHabilidad implements Habilidad {
     }
 
     // Método abstracto para usar la habilidad
-    public abstract void usarHabilidad(Player jugador);
+    public abstract void usarHabilidad(Player jugador, List<Player> opponents);
 
     // Getters para nombre y descripción
     public String getNombre() {
