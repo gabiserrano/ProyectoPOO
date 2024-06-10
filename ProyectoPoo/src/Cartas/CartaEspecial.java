@@ -16,7 +16,7 @@ public class CartaEspecial extends CartaNormal implements Carta{
     }
 
     public CartaEspecial(String owner){
-        super(owner);
+        super(owner, "Carta de Lia");
     }
 
     public CartaEspecial(String owner, Habilidad habilidad){
@@ -30,7 +30,7 @@ public class CartaEspecial extends CartaNormal implements Carta{
     }
 
     public CartaEspecial(String name , boolean shield,AbstractHabilidad habilidad) {
-        super(name);
+        super(name, "Carta de Lia");
         this.shield = shield;
         this.habilidad = habilidad;
     }

@@ -14,7 +14,7 @@ public class Tablero extends Observable {
     private List<Character> personajes;
 
     // Constructor privado para evitar instanciación externa
-    private Tablero() {
+    public Tablero() {
         jugadores = new ArrayList<>();
         personajes = new ArrayList<>();
     }
@@ -39,7 +39,7 @@ public class Tablero extends Observable {
     }
 
     public void agregarCPU() {
-        Player CPU = new Player();
+        Player CPU = new Player("CPU", new ArrayList<>());
         jugadores.add(CPU);
         notifyObservers(); // Notifica a los observadores sobre el cambio
     }
@@ -81,4 +81,11 @@ public class Tablero extends Observable {
     public void agregarPersonaje(Character personaje) {
         personajes.add(personaje);
     }
+
+    public void realizarAccion() {
+        // Método placeholder para realizar una acción en el tablero
+        System.out.println("Acción realizada en el tablero.");
+        notifyObservers(); // Notifica a los observadores sobre el cambio
+    }
 }
+
